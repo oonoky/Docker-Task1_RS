@@ -1,0 +1,25 @@
+version: '3'
+services:
+  postgres:
+    container_name: postgres-task
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_DB: tasks
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - 5332:5432
+    networks:
+      - spring-demo
+    restart: unless-stopped
+
+networks:
+  spring-demo:
+    driver: bridge
+
+volumes:
+  postgres:
+    driver: local
